@@ -11,7 +11,7 @@ use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
-
+define('APP_ROOT', __DIR__);
 // Instantiate PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
 
@@ -30,6 +30,10 @@ $dependencies($containerBuilder);
 // Set up repositories
 $repositories = require __DIR__ . '/../app/repositories.php';
 $repositories($containerBuilder);
+
+// Set up doctrine
+$doctrine = require __DIR__ . '/../app/doctrine.php';
+$doctrine($containerBuilder);
 
 // Build PHP-DI Container instance
 $container = $containerBuilder->build();
