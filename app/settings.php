@@ -6,7 +6,7 @@ use App\Application\Settings\Settings;
 use App\Application\Settings\SettingsInterface;
 use DI\ContainerBuilder;
 use Monolog\Logger;
-
+define('APP_ROOT', __DIR__.'/../');
 return function (ContainerBuilder $containerBuilder) {
 
     // Global Settings Object
@@ -47,7 +47,7 @@ return function (ContainerBuilder $containerBuilder) {
                         'dbname' => 'database',
                         'user' => 'root',
                         'password' => 'password',
-                        'charset' => 'utf-8'
+                        'charset' => 'utf8'
                     ]
                 ]
             ]);
