@@ -1,11 +1,16 @@
 <?
+
+declare(strict_types=1);
+
 namespace App\Domain\ProductoFinanciero;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
  */
-class ProductoFinanciero {
+class ProductoFinanciero
+{
 
   /**
    * @ORM\Id
@@ -13,7 +18,7 @@ class ProductoFinanciero {
    * @ORM\Column(type="integer")
    */
   private int $id;
-  
+
   /**
    * @ORM\Column(type="string", length=255)
    */
@@ -38,11 +43,11 @@ class ProductoFinanciero {
    * @ORM\Column(type="string", length=255)
    */
   private string $date_revision;
-  
+
 
   /**
    * Get the value of id
-   */ 
+   */
   public function getId()
   {
     return $this->id;
@@ -50,7 +55,7 @@ class ProductoFinanciero {
 
   /**
    * Get the value of name
-   */ 
+   */
   public function getName()
   {
     return $this->name;
@@ -60,7 +65,7 @@ class ProductoFinanciero {
    * Set the value of name
    *
    * @return  self
-   */ 
+   */
   public function setName($name)
   {
     $this->name = $name;
@@ -70,7 +75,7 @@ class ProductoFinanciero {
 
   /**
    * Get the value of description
-   */ 
+   */
   public function getDescription()
   {
     return $this->description;
@@ -80,7 +85,7 @@ class ProductoFinanciero {
    * Set the value of description
    *
    * @return  self
-   */ 
+   */
   public function setDescription($description)
   {
     $this->description = $description;
@@ -90,7 +95,7 @@ class ProductoFinanciero {
 
   /**
    * Get the value of logo
-   */ 
+   */
   public function getLogo()
   {
     return $this->logo;
@@ -100,7 +105,7 @@ class ProductoFinanciero {
    * Set the value of logo
    *
    * @return  self
-   */ 
+   */
   public function setLogo($logo)
   {
     $this->logo = $logo;
@@ -110,7 +115,7 @@ class ProductoFinanciero {
 
   /**
    * Get the value of date_release
-   */ 
+   */
   public function getDate_release()
   {
     return $this->date_release;
@@ -120,7 +125,7 @@ class ProductoFinanciero {
    * Set the value of date_release
    *
    * @return  self
-   */ 
+   */
   public function setDate_release($date_release)
   {
     $this->date_release = $date_release;
@@ -130,7 +135,7 @@ class ProductoFinanciero {
 
   /**
    * Get the value of date_revision
-   */ 
+   */
   public function getDate_revision()
   {
     return $this->date_revision;
@@ -140,7 +145,7 @@ class ProductoFinanciero {
    * Set the value of date_revision
    *
    * @return  self
-   */ 
+   */
   public function setDate_revision($date_revision)
   {
     $this->date_revision = $date_revision;
