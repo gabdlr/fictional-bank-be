@@ -6,7 +6,7 @@ namespace App\Application\DTO\ProductoFinanciero;
 
 abstract class ProductoFinancieroDTO
 {
-  public int $id;
+  public string $id;
   public string $name;
   public string $description;
   public string $logo;

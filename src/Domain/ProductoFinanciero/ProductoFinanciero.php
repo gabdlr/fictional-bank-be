@@ -14,10 +14,9 @@ class ProductoFinanciero
 
   /**
    * @ORM\Id
-   * @ORM\GeneratedValue()
-   * @ORM\Column(type="integer")
+   * @ORM\Column(type="string")
    */
-  private int $id;
+  private string $id;
 
   /**
    * @ORM\Column(type="string", length=255)
