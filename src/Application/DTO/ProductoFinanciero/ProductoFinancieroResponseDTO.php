@@ -2,19 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Application\DTO;
+namespace App\Application\DTO\ProductoFinanciero;
 
 use App\Domain\ProductoFinanciero\ProductoFinanciero;
+use App\Application\DTO\ProductoFinanciero\ProductoFinancieroDTO;
 
-class ProductoFinancieroDTO
+class ProductoFinancieroResponseDTO extends ProductoFinancieroDTO
 {
-
-  public int $id;
-  public string $name;
-  public string $description;
-  public string $logo;
-  public string $date_release;
-  public string $date_revision;
 
   public function __construct(ProductoFinanciero $productoFinanciero)
   {
