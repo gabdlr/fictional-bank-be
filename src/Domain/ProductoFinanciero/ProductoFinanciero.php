@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\ProductoFinanciero;
 
+use App\Application\DTO\ProductoFinanciero\ProductoFinancieroDTO;
 use Doctrine\ORM\Mapping as ORM;
+use App\Application\DTO\ProductoFinanciero\ProductoFinancieroResponseDTO;
 
 /**
  * @ORM\Entity()
@@ -150,5 +152,21 @@ class ProductoFinanciero
     $this->date_revision = $date_revision;
 
     return $this;
+  }
+
+  public function fromDTO(ProductoFinancieroDTO $productoFinancieroDTO): ProductoFinanciero
+  {
+    $this->id = $productoFinancieroDTO->id;
+    $this->name = $productoFinancieroDTO->name;
+    $this->logo = $productoFinancieroDTO->logo;
+    $this->description = $productoFinancieroDTO->description;
+    $this->date_release = $productoFinancieroDTO->date_release;
+    $this->date_revision = $productoFinancieroDTO->date_revision;
+    return $this;
+  }
+
+  public function toDTO(): ProductoFinancieroDTO
+  {
+    return new ProductoFinancieroResponseDTO($this);
   }
 }
