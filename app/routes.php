@@ -12,11 +12,14 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use App\Application\Middleware\JsonBodyParserMiddleware;
+use App\Application\Middleware\OfficerAccountIdentityMiddleware;
+use Psr\Http\Message\ServerRequestInterface;
 
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
-        // CORS Pre-Flight OPTIONS Request Handler
-        return $response;
+
+
+        return $response->withHeader('Access-Control-Allow-Origin', '')->withStatus(200);
     });
 
     $app->get('/', function (Request $request, Response $response) {
@@ -24,14 +27,28 @@ return function (App $app) {
         return $response;
     });
 
-    $app->group('/bp/products', function (Group $group) {
+    $app->group('/bp/products/', function (Group $group) {
         $group->get('', ListProductosFinancierosAction::class);
         $group->post('', CreateProductoFinancieroAction::class)->addMiddleware(new JsonBodyParserMiddleware());
-        $group->get('/verification', VerifyProductoFinancieroAction::class);
-    });
+        $group->get('verification', VerifyProductoFinancieroAction::class);
+    })->addMiddleware(new OfficerAccountIdentityMiddleware($app));
 
     $app->group('/users', function (Group $group) {
         $group->get('', ListUsersAction::class);
         $group->get('/{id}', ViewUserAction::class);
     });
+
+    $customErrorHandler = function (
+        ServerRequestInterface $request,
+        Throwable $exception
+    ) use ($app) {
+        $payload = ['error' => $exception->getMessage()];
+        $response = $app->getResponseFactory()->createResponse()->withStatus($exception->getCode() ?? 500);
+        $response->getBody()->write(
+            json_encode($payload, JSON_UNESCAPED_UNICODE)
+        );
+        return $response;
+    };
+
+    $app->addErrorMiddleware(false, false, false)->setDefaultErrorHandler($customErrorHandler);
 };
