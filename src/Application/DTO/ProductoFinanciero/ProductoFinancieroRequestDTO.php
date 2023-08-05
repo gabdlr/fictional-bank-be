@@ -19,7 +19,7 @@ class ProductoFinancieroRequestDTO extends ProductoFinancieroDTO
     $this->name = $productoFinanciero['name'] ?? '';
     $this->description = $productoFinanciero['description'] ?? '';
     $this->logo = $productoFinanciero['logo'] ?? '';
-    $this->date_release = $productoFinanciero['date_relase'] ?? (new DateTime())->format("Y-m-d");
+    $this->date_release = $productoFinanciero['date_release'] ?? (new DateTime())->format("Y-m-d");
     $this->date_revision = $productoFinanciero['date_revision'] ?? (new DateTime())->add(\DateInterval::createFromDateString('1 year'))->format("Y-m-d");
   }
 }
