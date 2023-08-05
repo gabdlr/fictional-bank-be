@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Application\Actions\ProductoFinanciero\CreateProductoFinancieroAction;
 use App\Application\Actions\ProductoFinanciero\DeleteProductoFinancieroAction;
 use App\Application\Actions\ProductoFinanciero\ListProductosFinancierosAction;
+use App\Application\Actions\ProductoFinanciero\UpdateProductoFinancieroAction;
 use App\Application\Actions\ProductoFinanciero\VerifyProductoFinancieroAction;
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\ViewUserAction;
@@ -29,6 +30,7 @@ return function (App $app) {
     $app->group('/bp/products/', function (Group $group) {
         $group->get('', ListProductosFinancierosAction::class);
         $group->post('', CreateProductoFinancieroAction::class)->addMiddleware(new JsonBodyParserMiddleware());
+        $group->put('', UpdateProductoFinancieroAction::class)->addMiddleware(new JsonBodyParserMiddleware());
         $group->delete('', DeleteProductoFinancieroAction::class);
         $group->get('verification', VerifyProductoFinancieroAction::class);
     })->addMiddleware(new OfficerAccountIdentityMiddleware($app));
