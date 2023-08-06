@@ -16,17 +16,21 @@ class ListProductosFinancierosAction extends ProductoFinancieroAction
    */
   protected function action(): Response
   {
-    /** 
-     * @var array<ProductoFinanciero> $productosFinancieros
-     */
-    $productosFinancieros = $this->entityManager->getRepository(ProductoFinanciero::class)->findAll();
+    try {
+      /** 
+       * @var array<ProductoFinanciero> $productosFinancieros
+       */
+      $productosFinancieros = $this->entityManager->getRepository(ProductoFinanciero::class)->findAll();
 
-    $newResponse = [];
-    foreach ($productosFinancieros as $productoFinanciero) {
-      $productDTO = new ProductoFinancieroResponseDTO($productoFinanciero);
-      array_push($newResponse, (array)$productDTO);
+      $newResponse = [];
+      foreach ($productosFinancieros as $productoFinanciero) {
+        $productDTO = new ProductoFinancieroResponseDTO($productoFinanciero);
+        array_push($newResponse, (array)$productDTO);
+      }
+
+      return $this->respondWithData($newResponse);
+    } catch (\Throwable $e) {
+      throw new \Exception($e->getMessage(), 400);
     }
-
-    return $this->respondWithData($newResponse);
   }
 }
