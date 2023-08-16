@@ -44,7 +44,7 @@ COPY --chown=www-data composer.json /var/www/html/
 # Also, volume mounting a bind-mounted cache to composer's /.composer folder helps speeding up the build
 # since even when you break the cache by adding/removing a composer package, all previously installed
 # packages are served from the mounted cache.
-RUN --mount=type=cache,id=ridiculous,target=/.composer/cache composer install --no-autoloader --no-scripts
+RUN --mount=type=cache,id=s/8af11cfc-b9db-4f77-bebb-1b5024eb6e2e-/.composer/cache,target=/.composer/cache composer install --no-autoloader --no-scripts
 
 # Copy the rest of the source code to the container. Now, if source files are changed, the cache-layer
 # breaks here and the only the 'composer dump-autoload' command will have to run again.
