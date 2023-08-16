@@ -55,4 +55,4 @@ RUN composer dump-autoload --optimize
 
 # Change ownership of the root folder to www-data
 RUN chown -R www-data:www-data vendor/
-EXPOSE 80
+EXPOSE ${PORT}
