@@ -9,10 +9,13 @@ LABEL maintainer=t.wierenga@live.nl
 RUN apt update -y
 
 # Install the PHP extension installer that will install and configure the extension, but will also install all dependencies.
-ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+#ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+RUN apt-get update \
+&& apt-get install -y zip unzip git nano libzip-dev default-mysql-client \
+&& docker-php-ext-install zip pdo_mysql
 
 # Install the ZIP extension since Composer requires it
-RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && install-php-extensions zip
+#RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && install-php-extensions zip
 
 # Copy the composer binary to the container
 COPY --from=composer /usr/bin/composer /usr/bin/composer
