@@ -12,7 +12,7 @@ RUN apt update -y
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
 
 # Install the ZIP extension since Composer requires it
-RUN chmod uga+x /usr/local/bin/install-php-extensions && sync &&     install-php-extensions zip
+RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && install-php-extensions zip
 
 # Copy the composer binary to the container
 COPY --from=composer /usr/bin/composer /usr/bin/composer
@@ -44,7 +44,7 @@ COPY --chown=www-data composer.json /var/www/html/
 # Also, volume mounting a bind-mounted cache to composer's /.composer folder helps speeding up the build
 # since even when you break the cache by adding/removing a composer package, all previously installed
 # packages are served from the mounted cache.
-RUN --mount=type=cache,id=composer,target=/.composer/cache composer install --no-autoloader --no-scripts
+RUN --mount=type=cache,id=ridiculous,target=/.composer/cache composer install --no-autoloader --no-scripts
 
 # Copy the rest of the source code to the container. Now, if source files are changed, the cache-layer
 # breaks here and the only the 'composer dump-autoload' command will have to run again.
