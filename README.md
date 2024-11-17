@@ -1,1 +1,1 @@
-This is a PHP backend application for the Angular assestment "banco-pichincha" for Devsu LLC.
+This is a PHP backend application for an assestment.
